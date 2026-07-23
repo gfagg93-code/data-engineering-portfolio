@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: dim_locations
+    description: "Dimension table con paesi e città uniche presenti nelle misurazioni"
+    columns:
+      - name: location_id
+        description: "Chiave surrogata univoca per ogni combinazione paese/città"
+        tests:
+          - unique
+          - not_null
+      - name: country
+        tests:
+          - not_null
+
+  - name: dim_pollutants
+    description: "Dimension table con gli inquinanti monitorati"
+    columns:
+      - name: pollutant_id
+        description: "Chiave surrogata univoca per ogni inquinante"
+        tests:
+          - unique
+          - not_null
+      - name: pollutant
+        tests:
+          - not_null
+
+  - name: fact_air_quality_measurements
+    description: "Fact table con le misurazioni di qualità dell'aria"
+    columns:
+      - name: value
+        description: "Valore misurato dell'inquinante"
+        tests:
+          - not_null
+      - name: measured_at
+        tests:
+          - not_null
